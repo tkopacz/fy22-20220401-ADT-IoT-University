@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="resourceName" Label="resourceName" Group="Expanded" SubscriptionId="subscriptionId" TotalStreamingUnits="1" ActivityId="e795f027-9143-470c-80e9-1619213523b9" EventsOutOfOrderPolicy="Adjust" EventsOutOfOrderMaxDelayInMS="2147483647" EventsLateArrivalMaxDelayInMS="-1" />
+    <Node Id="streamingNode0" Label="streamingNode0" Group="Expanded" MemorySizeInMB="1024" />
+    <Node Id="blob#0$0" Label="blob" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" InputTimeShift="00:02:00" />
+    <Node Id="blob#0$0\blob\blob_12" Label="blob" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="Output" />
+    <Node Id="blob#0$0\blob\Op_11" Label="Op" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="Operator" />
+    <Node Id="blob#0$0\blob\InnerJoin_10" Label="InnerJoin" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="InnerJoin" />
+    <Node Id="blob#0$0\blob\Op_7" Label="Op" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="Operator" />
+    <Node Id="blob#0$0\blob\c1_6" Label="c1" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="Input" />
+    <Node Id="blob#0$0\blob\Op_9" Label="Op" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="Operator" />
+    <Node Id="blob#0$0\blob\c2_8" Label="c2" Group="Expanded" ProcessorType="Trill" ProcessorId="blob#0$0" QueryPlanNodeType="Input" />
+    <Node Id="blob-blob#0$0" Label="blob" Group="Expanded" ProcessorType="Output" ProcessorId="blob-blob#0$0" AdapterType="LocalOutput" PartitionIds="0" SerializerType="Json" InputTimeShift="00:13:00" />
+    <Node Id="c#0$0" Label="c" Group="Expanded" ProcessorType="Trill" ProcessorId="c#0$0" InputTimeShift="00:01:00" />
+    <Node Id="c#0$0\c\c_5" Label="c" Group="Expanded" ProcessorType="Trill" ProcessorId="c#0$0" QueryPlanNodeType="Output" />
+    <Node Id="c#0$0\c\Op_4" Label="Op" Group="Expanded" ProcessorType="Trill" ProcessorId="c#0$0" QueryPlanNodeType="Operator" />
+    <Node Id="c#0$0\c\Filter_3" Label="Filter" Group="Expanded" ProcessorType="Trill" ProcessorId="c#0$0" QueryPlanNodeType="Filter" />
+    <Node Id="c#0$0\c\Aggregate_2" Label="Aggregate" Group="Expanded" ProcessorType="Trill" ProcessorId="c#0$0" QueryPlanNodeType="Aggregate" />
+    <Node Id="c#0$0\c\iot_1" Label="iot" Group="Expanded" ProcessorType="Trill" ProcessorId="c#0$0" QueryPlanNodeType="Input" />
+    <Node Id="c_7#0$0" Label="c" Group="Expanded" ProcessorType="Trill" ProcessorId="c_7#0$0" InputTimeShift="00:01:00" />
+    <Node Id="c_7#0$0\c\c_5" Label="c" Group="Expanded" ProcessorType="Trill" ProcessorId="c_7#0$0" QueryPlanNodeType="Output" />
+    <Node Id="c_7#0$0\c\Op_4" Label="Op" Group="Expanded" ProcessorType="Trill" ProcessorId="c_7#0$0" QueryPlanNodeType="Operator" />
+    <Node Id="c_7#0$0\c\Filter_3" Label="Filter" Group="Expanded" ProcessorType="Trill" ProcessorId="c_7#0$0" QueryPlanNodeType="Filter" />
+    <Node Id="c_7#0$0\c\Aggregate_2" Label="Aggregate" Group="Expanded" ProcessorType="Trill" ProcessorId="c_7#0$0" QueryPlanNodeType="Aggregate" />
+    <Node Id="c_7#0$0\c\iot_1" Label="iot" Group="Expanded" ProcessorType="Trill" ProcessorId="c_7#0$0" QueryPlanNodeType="Input" />
+    <Node Id="iot#0$1" Label="iot" Group="Expanded" ProcessorType="Input" ProcessorId="iot#0$1" AdapterType="InputFile" PartitionIds="0" SerializerType="Json" />
+    <Node Id="iot#0$0" Label="iot" Group="Expanded" ProcessorType="Input" ProcessorId="iot#0$0" AdapterType="InputFile" PartitionIds="0" SerializerType="Json" />
+  </Nodes>
+  <Links>
+    <Link Source="resourceName" Target="streamingNode0" Category="Contains" />
+    <Link Source="streamingNode0" Target="blob#0$0" Label="blob#0$0" Category="Contains" />
+    <Link Source="blob#0$0" Target="c#0$0" />
+    <Link Source="blob#0$0" Target="c_7#0$0" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\blob_12" Category="Contains" />
+    <Link Source="blob#0$0\blob\blob_12" Target="blob#0$0\blob\Op_11" Label="source" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\Op_11" Category="Contains" />
+    <Link Source="blob#0$0\blob\Op_11" Target="blob#0$0\blob\InnerJoin_10" Label="source" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\InnerJoin_10" Category="Contains" />
+    <Link Source="blob#0$0\blob\InnerJoin_10" Target="blob#0$0\blob\Op_7" Label="left" />
+    <Link Source="blob#0$0\blob\InnerJoin_10" Target="blob#0$0\blob\Op_9" Label="right" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\Op_7" Category="Contains" />
+    <Link Source="blob#0$0\blob\Op_7" Target="blob#0$0\blob\c1_6" Label="source" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\c1_6" Category="Contains" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\Op_9" Category="Contains" />
+    <Link Source="blob#0$0\blob\Op_9" Target="blob#0$0\blob\c2_8" Label="source" />
+    <Link Source="blob#0$0" Target="blob#0$0\blob\c2_8" Category="Contains" />
+    <Link Source="streamingNode0" Target="blob-blob#0$0" Label="blob-blob#0$0" Category="Contains" />
+    <Link Source="blob-blob#0$0" Target="blob#0$0" />
+    <Link Source="streamingNode0" Target="c#0$0" Label="c#0$0" Category="Contains" />
+    <Link Source="c#0$0" Target="iot#0$0" />
+    <Link Source="c#0$0" Target="c#0$0\c\c_5" Category="Contains" />
+    <Link Source="c#0$0\c\c_5" Target="c#0$0\c\Op_4" Label="source" />
+    <Link Source="c#0$0" Target="c#0$0\c\Op_4" Category="Contains" />
+    <Link Source="c#0$0\c\Op_4" Target="c#0$0\c\Filter_3" Label="source" />
+    <Link Source="c#0$0" Target="c#0$0\c\Filter_3" Category="Contains" />
+    <Link Source="c#0$0\c\Filter_3" Target="c#0$0\c\Aggregate_2" Label="source" />
+    <Link Source="c#0$0" Target="c#0$0\c\Aggregate_2" Category="Contains" />
+    <Link Source="c#0$0\c\Aggregate_2" Target="c#0$0\c\iot_1" Label="source" />
+    <Link Source="c#0$0" Target="c#0$0\c\iot_1" Category="Contains" />
+    <Link Source="streamingNode0" Target="c_7#0$0" Label="c_7#0$0" Category="Contains" />
+    <Link Source="c_7#0$0" Target="iot#0$1" />
+    <Link Source="c_7#0$0" Target="c_7#0$0\c\c_5" Category="Contains" />
+    <Link Source="c_7#0$0\c\c_5" Target="c_7#0$0\c\Op_4" Label="source" />
+    <Link Source="c_7#0$0" Target="c_7#0$0\c\Op_4" Category="Contains" />
+    <Link Source="c_7#0$0\c\Op_4" Target="c_7#0$0\c\Filter_3" Label="source" />
+    <Link Source="c_7#0$0" Target="c_7#0$0\c\Filter_3" Category="Contains" />
+    <Link Source="c_7#0$0\c\Filter_3" Target="c_7#0$0\c\Aggregate_2" Label="source" />
+    <Link Source="c_7#0$0" Target="c_7#0$0\c\Aggregate_2" Category="Contains" />
+    <Link Source="c_7#0$0\c\Aggregate_2" Target="c_7#0$0\c\iot_1" Label="source" />
+    <Link Source="c_7#0$0" Target="c_7#0$0\c\iot_1" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot#0$1" Label="iot#0$1" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot#0$0" Label="iot#0$0" Category="Contains" />
+  </Links>
+  <Properties />
+  <Categories />
+</DirectedGraph>

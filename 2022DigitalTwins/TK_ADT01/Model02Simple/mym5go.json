@@ -1,0 +1,21 @@
+{
+    "@context": "dtmi:dtdl:context;2",
+    "@id": "dtmi:example:M5Stack;1",
+    "@type": "Interface",
+    "displayName": "TK M5GO IOT Starter Kit",
+    "description": "Extension of M5GO with relation",
+    "extends": [
+        "dtmi:M5Stack:m5go;1"
+    ],
+    "contents":[
+        {
+            "@type": "Relationship",
+            "name": "inroom",
+            "displayName": "Sensor is in the room (single one!). Ps. name: in - funny errors",
+            "target": "dtmi:example:Room;1",
+            "minMultiplicity": 0,
+            "maxMultiplicity": 1
+          }
+      
+    ]
+}

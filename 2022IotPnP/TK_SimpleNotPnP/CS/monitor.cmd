@@ -1,0 +1,1 @@
+az iot hub monitor-events --hub-name pltkw3adtiot

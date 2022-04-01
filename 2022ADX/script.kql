@@ -1,0 +1,39 @@
+
+.create table pltkw3adtdemoiot (angle: int, pir:string, AccelX: real, Temperature: real, Humidity: real, Pressure: real, deviceId: string, enqueueTime:datetime)
+
+.create table pltkw3adtdemoiot ingestion json mapping 'pltkw3adtdemoiotMapping' 
+'[{"column":"angle","path":"$.angle","datatype":"int"},{"column":"pir","path":"$.pir","datatype":"string"},{"column":"AccelX","path":"$.AccelX","datatype":"real"},{"column":"Temperature","path":"$.Temperature","datatype":"real"},{"column":"Humidity","path":"$.Humidity","datatype":"real"},{"column":"Pressure","path":"$.Pressure","datatype":"real"},{"column":"deviceId","path":"$.iothub-connection-device-id","datatype":"string"},{"column":"enqueueTime","path":"$.iothub-enqueuedtime","datatype":"datetime"}]'
+
+.alter table pltkw3adtdemoiot ingestion json mapping 'pltkw3adtdemoiotMapping' 
+'[{"column":"angle","path":"$.angle","datatype":"int"},{"column":"pir","path":"$.pir","datatype":"string"},{"column":"AccelX","path":"$.AccelX","datatype":"real"},{"column":"Temperature","path":"$.Temperature","datatype":"real"},{"column":"Humidity","path":"$.Humidity","datatype":"real"},{"column":"Pressure","path":"$.Pressure","datatype":"real"},{"column":"deviceId","path":"$.iothub-connection-device-id","datatype":"string"},{"column":"enqueueTime","path":"$.iothub-enqueuedtime","datatype":"datetime"}]'
+
+
+//.clear table pltkw3adtdemoiot data 
+
+pltkw3adtdemoiot | count
+
+pltkw3adtdemoiot | sort by enqueueTime desc | limit 10
+
+
+evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT T.$dtId as tid, T.Temperature FROM DIGITALTWINS T") 
+
+evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT Parent.$dtId as parent_tid FROM digitaltwins Parent JOIN Child RELATED Parent.contains WHERE Child.$dtId = 'm5go0001'") 
+
+
+evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT $dtId as child_tid FROM digitaltwins WHERE $dtId = 'room01'") 
+
+evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT T FROM DIGITALTWINS T JOIN CT RELATED T.inroom WHERE CT.$dtId = 'room01'") 
+
+evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT T.$dtId as child_tid FROM DIGITALTWINS T JOIN CT RELATED T.inroom WHERE CT.$dtId = 'room01'") 
+
+
+let dd = toscalar(evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT T.$dtId as child_tid FROM DIGITALTWINS T JOIN CT RELATED T.inroom WHERE CT.$dtId = 'room01'"));
+pltkw3adtdemoiot | where deviceId == dd | sort by enqueueTime desc | limit 100 
+
+
+let dd = toscalar(evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT T.$dtId as child_tid FROM DIGITALTWINS T JOIN CT RELATED T.inroom WHERE CT.$dtId = 'room01'"));
+pltkw3adtdemoiot | where deviceId == dd | sort by enqueueTime desc | limit 100 | render timechart  
+
+let dd = toscalar(evaluate azure_digital_twins_query_request("https://pltkw3adtdemo.api.weu.digitaltwins.azure.net", "SELECT T.$dtId as child_tid FROM DIGITALTWINS T JOIN CT RELATED T.inroom WHERE CT.$dtId = 'room01'"));
+pltkw3adtdemoiot | where deviceId == dd | sort by enqueueTime desc | limit 100 
+

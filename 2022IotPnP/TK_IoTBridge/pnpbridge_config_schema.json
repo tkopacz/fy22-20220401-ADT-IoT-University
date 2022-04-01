@@ -1,0 +1,144 @@
+{
+	"$id": "http://contosso.com/pnpbridge_config.json",
+	"$schema": "http://contosso.com/pnpbridge_config/schema#",
+	"description": "A configuration for sensor bridge",
+	"type": "object",
+	"properties": {
+		"pnp_bridge_connection_parameters": {
+			"$ref": "#/definitions/pnp_bridge_connection_parameters_schema"
+		},
+		"pnp_bridge_interface_components" : {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/pnp_bridge_interface_components_schema"
+			}
+		},
+		"pnp_bridge_adapter_global_configs" : {
+			"type": "object",
+			"items": {
+				"$ref": "#/definitions/pnp_bridge_adapter_global_configs_schema"
+			}
+		}
+	},
+	"oneOf": [
+		{
+		   "properties": {
+			   "pnp_bridge_config_source": { "enum": ["local"] }
+			},
+		    "required": ["pnp_bridge_interface_components"]
+		},
+		{
+			"properties": {
+				"pnp_bridge_config_source": { "enum": ["cloud"] }
+			},
+			"dependencies" : {
+				"pnp_bridge_config_source": {
+					"not": { "required": ["pnp_bridge_interface_components"] }
+				}
+			}
+		}
+	],
+	"definitions": {
+		"pnp_bridge_connection_parameters_schema" : {
+			"properties": {
+				"connection_type": { 
+					"enum": [
+						"connection_string",
+						"dps",
+						"edge_module"
+					]
+				},
+				"auth_parameters": {
+					"$ref": "#/definitions/auth_parameters_schema"
+				},
+				"root_interface_model_id" :{
+					"type": "string"
+				}
+			},
+			"oneOf": [
+				{
+				  "properties": {
+					"connection_type": { "enum": ["connection_string"] },
+					"connection_string" : {
+						"type": "string"
+					}
+				  },
+				  "required": ["connection_string"]
+				},
+				{
+				  "properties": {
+					"connection_type": { "enum": ["dps"] },
+					"dps_parameters" : {
+						"$ref": "#/definitions/dps_parameters_schema"
+					}
+				  },
+				  "required": ["dps_parameters"]
+				},
+				{
+					"properties": {
+					  "connection_type": { "enum": ["edge_module"] }
+					}
+				}
+			],
+			"required": ["connection_type", "root_interface_model_id"]
+		},
+		"auth_parameters_schema" : {
+			"properties": {
+				"auth_type": { "enum": ["symmetric_key", "x509"] }
+			},
+			"oneOf": [
+				{
+				  "properties": {
+					"auth_type": { "enum": ["symmetric_key"] },
+					"symmetric_key" : {
+						"type": "string"
+					}
+				  },
+				  "required": ["symmetric_key"]
+				},
+				{
+				  "properties": {
+					"auth_type": { "enum": ["x509"] }
+				  }
+				}
+			],
+			"required": ["auth_type"]
+		},
+		"dps_parameters_schema" : {
+			"properties": {
+				"global_prov_uri": { 
+					"type": "string"
+				},
+				"id_scope": { 
+					"type": "string"
+				},
+				"device_id": { 
+					"type": "string"
+				}
+			},
+			"required": [
+				"global_prov_uri",
+				"id_scope",
+				"device_id"
+			]
+		},
+		"pnp_bridge_interface_components_schema" : {
+			"properties": {
+				"pnp_bridge_component_name": { 
+					"type": "string"
+				},
+				"pnp_bridge_adapter_id": { 
+					"type": "string"
+				}
+			},
+			"required": ["pnp_bridge_component_name", "pnp_bridge_adapter_id"]
+		},
+		"pnp_bridge_adapter_global_configs_schema" : {
+			"type": "object",
+			"properties": {
+				"type": "object"
+			  }
+		}
+	},
+	"required": ["pnp_bridge_connection_parameters", "pnp_bridge_config_source"]
+}

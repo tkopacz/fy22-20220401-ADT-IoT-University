@@ -1,0 +1,79 @@
+/*
+CREATE TABLE iot (  
+   angle bigint,
+   pir nvarchar(max),
+   AccelX float,
+   Temperature float, 
+   Pressure float, 
+   Humidity float, 
+   ConnectionDeviceId nvarchar(max),
+   EnqueuedTime datetime
+); 
+*/
+
+
+SELECT
+    /*angle,pir,AccelX,Temperature, Pressure, Humidity, IoTHub.ConnectionDeviceId as DeviceId, IoTHub.EnqueuedTime as Dt*/
+    [iot].*, [iot].IoTHub.EnqueuedTime as Dt, [iot].IoTHub.ConnectionDeviceId as ConnectionDeviceId
+INTO
+    [blob]
+FROM
+    [iot]
+    TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+----------------------------------------
+SELECT [iot].IoTHub.ConnectionDeviceId , System.Timestamp() as WindowEnd, max([iot].angle)
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+GROUP BY [iot].IoTHub.ConnectionDeviceId , HoppingWindow(minute, 1, 1)
+HAVING max([iot].angle)>250 
+
+----------------------------------------
+SELECT System.Timestamp() as WindowEnd, max([iot].angle)
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+WHERE [iot].IoTHub.ConnectionDeviceId ='m5go0001'
+GROUP BY HoppingWindow(minute, 1, 1) 
+
+----------------------------------------
+SELECT System.Timestamp() as WindowEnd, max([iot].angle)
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+WHERE [iot].IoTHub.ConnectionDeviceId ='f0001r0003s0001'
+GROUP BY HoppingWindow(minute, 1, 1) 
+----------------------------------------
+SELECT [iot].IoTHub.ConnectionDeviceId , System.Timestamp() as WindowEnd, max([iot].angle)
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+GROUP BY [iot].IoTHub.ConnectionDeviceId , HoppingWindow(minute, 1, 1)
+HAVING max([iot].angle)>250 and ([iot].IoTHub.ConnectionDeviceId = 'm5go0001' or [iot].IoTHub.ConnectionDeviceId = 'f0001r0003s0001')
+
+----------------------------------------
+with c as 
+( SELECT [iot].IoTHub.ConnectionDeviceId , System.Timestamp() as WindowEnd, max([iot].angle) as maxa
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+GROUP BY [iot].IoTHub.ConnectionDeviceId , HoppingWindow(minute, 1, 1)
+HAVING max([iot].angle)>250 and ([iot].IoTHub.ConnectionDeviceId = 'm5go0001' or [iot].IoTHub.ConnectionDeviceId = 'f0001r0003s0001')
+)
+
+select c1.WindowEnd,c1.ConnectionDeviceId as dev1, c2.ConnectionDeviceId as dev2
+from c c1 join c c2 on c1.WindowEnd = c2.WindowEnd AND c1.ConnectionDeviceId = 'm5go0001' AND c2.ConnectionDeviceId = 'f0001r0003s0001' AND DATEDIFF(minute,c1,c2) BETWEEN 0 AND 1
+
+----------------------------------------
+with c as 
+( SELECT [iot].IoTHub.ConnectionDeviceId , System.Timestamp() as WindowEnd, max([iot].angle) as maxa
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+GROUP BY [iot].IoTHub.ConnectionDeviceId , HoppingWindow(minute, 1, 1)
+HAVING max([iot].angle)>250 and ([iot].IoTHub.ConnectionDeviceId = 'm5go0001' or [iot].IoTHub.ConnectionDeviceId = 'f0001r0003s0001')
+)
+
+select c1.WindowEnd,c1.ConnectionDeviceId as dev1, c2.ConnectionDeviceId as dev2
+into blob
+from c c1 join c c2 on c1.WindowEnd = c2.WindowEnd AND c1.ConnectionDeviceId = 'm5go0001' AND c2.ConnectionDeviceId = 'f0001r0003s0001' AND DATEDIFF(minute,c1,c2) BETWEEN 0 AND 1
+
+----------------------------------------
+with c as 
+( SELECT [iot].IoTHub.ConnectionDeviceId , System.Timestamp() as WindowEnd, max([iot].Temperature) as maxt
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+GROUP BY [iot].IoTHub.ConnectionDeviceId , HoppingWindow(minute, 2, 1)
+HAVING max([iot].Temperature)>26 and ([iot].IoTHub.ConnectionDeviceId = 'm5go0001' or [iot].IoTHub.ConnectionDeviceId = 'f0001r0003s0001')
+)
+
+select c1.WindowEnd,c1.ConnectionDeviceId as dev1,c1.maxt as dev1maxt , c2.ConnectionDeviceId as dev2,c2.maxt as dev2maxt
+into blob
+from c c1 join c c2 on c1.WindowEnd = c2.WindowEnd AND c1.ConnectionDeviceId = 'm5go0001' AND c2.ConnectionDeviceId = 'f0001r0003s0001' AND DATEDIFF(minute,c1,c2) BETWEEN 0 AND 0

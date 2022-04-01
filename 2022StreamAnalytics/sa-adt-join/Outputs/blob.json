@@ -1,0 +1,24 @@
+{
+    "Name": "blob",
+    "DataSourceType": "Blob Storage",
+    "BlobStorageProperties": {
+        "StorageAccounts": [
+            {
+                "AccountName": "pltkw3storageadt",
+                "AccountKey": null
+            }
+        ],
+        "Container": "sa-adt-join",
+        "PathPattern": "{date}",
+        "DateFormat": "yyyy/MM/dd",
+        "TimeFormat": "HH",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "8809a09b-a1a8-4e2a-97db-6ea67bfb928b.StreamAnalystics",
+    "Serialization": {
+        "Type": "Csv",
+        "Encoding": "UTF8",
+        "FieldDelimiter": ";"
+    },
+    "ScriptType": "Output"
+}

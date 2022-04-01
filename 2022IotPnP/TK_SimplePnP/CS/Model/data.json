@@ -1,0 +1,28 @@
+{
+    "Temperature": 23
+}
+
+or?
+
+{
+    "Temp": 23
+}
+
+or?
+
+{
+    "temperaturka": 23
+}
+
+or?
+
+{
+    "data":
+    [
+        {
+            "timestamp": "2021-01-01 01:01:01.123",
+            "typeofmeasurement": "Temperature",
+            "value": 23
+        }
+    ]
+}

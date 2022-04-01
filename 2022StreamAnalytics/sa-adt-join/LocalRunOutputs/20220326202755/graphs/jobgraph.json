@@ -1,0 +1,111 @@
+﻿{
+  "nodes": [
+    {
+      "id": "iot_1",
+      "name": "iot",
+      "type": "Input",
+      "processorId": "iot#0$1",
+      "dataSourceType": "InputFile",
+      "partitionIds": [
+        0
+      ]
+    },
+    {
+      "id": "iot_0",
+      "name": "iot",
+      "type": "Input",
+      "processorId": "iot#0$0",
+      "dataSourceType": "InputFile",
+      "partitionIds": [
+        0
+      ]
+    },
+    {
+      "id": "c_c_0",
+      "name": "c",
+      "type": "Step",
+      "processorId": "c#0$0",
+      "partitionIds": [
+        0
+      ],
+      "scriptPosition": {
+        "startLine": 2,
+        "startColumn": 3,
+        "startOffset": 14,
+        "endLine": 5,
+        "endColumn": 133,
+        "endOffset": 369
+      },
+      "inputTimeShift": "00:01:00"
+    },
+    {
+      "id": "c_7_c_0",
+      "name": "c",
+      "type": "Step",
+      "processorId": "c_7#0$0",
+      "partitionIds": [
+        0
+      ],
+      "scriptPosition": {
+        "startLine": 2,
+        "startColumn": 3,
+        "startOffset": 14,
+        "endLine": 5,
+        "endColumn": 133,
+        "endOffset": 369
+      },
+      "inputTimeShift": "00:01:00"
+    },
+    {
+      "id": "outputStep_outputStep_0",
+      "name": "outputStep",
+      "type": "Step",
+      "processorId": "outputStep#0$0",
+      "partitionIds": [
+        0
+      ],
+      "scriptPosition": {
+        "startLine": 8,
+        "startColumn": 1,
+        "startOffset": 377,
+        "endLine": 9,
+        "endColumn": 178,
+        "endOffset": 636
+      },
+      "inputTimeShift": "00:02:00"
+    },
+    {
+      "id": "outputStep-output_0",
+      "name": "output",
+      "type": "Output",
+      "processorId": "outputStep-output#0$0",
+      "dataSourceType": "LocalOutput",
+      "partitionIds": [
+        0
+      ],
+      "inputTimeShift": "00:13:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "iot_1",
+      "target": "c_7_c_0"
+    },
+    {
+      "source": "iot_0",
+      "target": "c_c_0"
+    },
+    {
+      "source": "c_c_0",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "c_7_c_0",
+      "target": "outputStep_outputStep_0"
+    },
+    {
+      "source": "outputStep_outputStep_0",
+      "target": "outputStep-output_0"
+    }
+  ]
+}

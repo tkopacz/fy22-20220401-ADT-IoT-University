@@ -1,0 +1,81 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ASAApiVersion": {
+      "value": "2017-04-01-preview"
+    },
+    "StreamAnalyticsJobName": {
+      "value": "sa-adt-join"
+    },
+    "Location": {
+      "value": "Central US"
+    },
+    "OutputStartMode": {
+      "value": "JobStartTime"
+    },
+    "OutputStartTime": {
+      "value": "2019-01-01T00:00:00Z"
+    },
+    "DataLocale": {
+      "value": "en-US"
+    },
+    "OutputErrorPolicy": {
+      "value": "Stop"
+    },
+    "EventsLateArrivalMaxDelayInSeconds": {
+      "value": 5
+    },
+    "EventsOutOfOrderMaxDelayInSeconds": {
+      "value": 0
+    },
+    "EventsOutOfOrderPolicy": {
+      "value": "Adjust"
+    },
+    "StreamingUnits": {
+      "value": 1
+    },
+    "CompatibilityLevel": {
+      "value": "1.2"
+    },
+    "ContentStoragePolicy": {
+      "value": "SystemAccount"
+    },
+    "Input_iot_iotHubNamespace": {
+      "value": "pltkw3adtdemoiot"
+    },
+    "Input_iot_consumerGroupName": {
+      "value": "sa2"
+    },
+    "Input_iot_endpoint": {
+      "value": "messages/events"
+    },
+    "Input_iot_sharedAccessPolicyName": {
+      "value": "iothubowner"
+    },
+    "Input_iot_sharedAccessPolicyKey": {
+      "value": null
+    },
+    "Output_blob_Storage1_accountName": {
+      "value": "pltkw3storageadt"
+    },
+    "Output_blob_Storage1_accountKey": {
+      "value": null
+    },
+    "Output_blob_container": {
+      "value": "sa-adt-join"
+    },
+    "Output_blob_pathPattern": {
+      "value": "{date}"
+    },
+    "Output_blob_dateFormat": {
+      "value": "yyyy/MM/dd"
+    },
+    "Output_blob_timeFormat": {
+      "value": "HH"
+    },
+    "Output_blob_authenticationMode": {
+      "value": "ConnectionString"
+    }
+  }
+}

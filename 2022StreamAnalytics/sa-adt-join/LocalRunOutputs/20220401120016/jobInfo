@@ -1,0 +1,10 @@
+﻿{
+  "id": "32a6922f-91cc-4d1a-b9b8-782b446fa56e",
+  "port": 19860,
+  "inputs": [
+    "iot"
+  ],
+  "outputs": [
+    "blob"
+  ]
+}

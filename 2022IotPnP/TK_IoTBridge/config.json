@@ -1,0 +1,30 @@
+{
+  "$schema": "pnpbridge_config_schema.json",
+  "pnp_bridge_connection_parameters": {
+    "connection_type" : "connection_string",
+    "connection_string" :                                                                                                                                                                                                                                                                                                                                                                                                                                         "HostName=pltkw3adtiot.azure-devices.net;DeviceId=pltkw53pnp;SharedAccessKey=aaaaaaaaaaaaaa=",
+    "root_interface_model_id": "dtmi:com:example:PnpBridgeEnvironmentalSensor;1",
+    "auth_parameters": {
+        "auth_type": "symmetric_key",
+        "symmetric_key":                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        "aaaaaaaaaaaaaaaaaaaaaa="
+    },
+    "dps_parameters": {
+        "global_prov_uri": "[To fill in]",
+        "id_scope": "[To fill in]",
+        "device_id": "[To fill in]"
+    }
+},
+  "pnp_bridge_debug_trace": false,
+  "pnp_bridge_config_source": "local",
+  "_comment_devices": "Array of devices for Azure Pnp interface should be published",
+  "pnp_bridge_interface_components": [
+      {
+          "_comment": "Environment Sensor Device Component",
+          "pnp_bridge_component_name": "environmentalSensor",
+          "pnp_bridge_adapter_id": "environment-sensor-sample-pnp-adapter",
+          "pnp_bridge_adapter_config": {
+              "sensor_id": "10"
+          }
+      }
+  ]
+}

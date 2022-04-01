@@ -1,0 +1,7 @@
+{
+    "InputAlias": "iot",
+    "Type": "Data Stream",
+    "Format": "Json",
+    "FilePath": "Z:\\AzFY21-PaaS03\\16-IoT-Hub\\2022StreamAnalytics\\sa-adt-copy-to-blob-iot.json",
+    "ScriptType": "InputMock"
+}

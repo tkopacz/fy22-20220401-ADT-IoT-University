@@ -1,0 +1,10 @@
+﻿{
+  "id": "e9313f9c-55a4-4351-8911-ac42eee476e6",
+  "port": 20554,
+  "inputs": [
+    "iot"
+  ],
+  "outputs": [
+    "output"
+  ]
+}

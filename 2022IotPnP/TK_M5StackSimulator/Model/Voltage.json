@@ -1,0 +1,55 @@
+{
+  "@context": "dtmi:dtdl:context;2",
+  "@id": "dtmi:tkopacz:com:example:Voltage;1",
+  "@type": "Interface",
+  "displayName": "Voltage",
+  "description": "Description",
+  "contents": [
+    {
+      "@type": [
+        "Telemetry",
+        "Voltage"
+      ],
+      "name": "voltage",
+      "displayName": "Voltage (telemetry)",
+      "description": "Voltage in millivolts.",
+      "schema": "double",
+      "unit": "millivolt"
+    },
+    {
+      "@type": [
+        "Telemetry",
+        "Current"
+      ],
+      "name": "current",
+      "displayName": "Current (telemetry)",
+      "description": "Current in mili amps.",
+      "schema": "double",
+      "unit": "milliampere"
+    },
+    {
+      "@type": [
+        "Property",
+        "Voltage"
+      ],
+      "name": "targetVoltage",
+      "schema": "double",
+      "displayName": "Target voltage (property)",
+      "description": "Target voltage to be delivered",
+      "unit": "millivolt",
+      "writable": true
+    },
+    {
+      "@type": [
+        "Property",
+        "Resistance"
+      ],
+      "name": "resistance",
+      "schema": "double",
+      "displayName": "Target resistance (set)",
+      "description": "Target resistance",
+      "unit": "milliohm",
+      "writable": true
+    }
+  ]
+}

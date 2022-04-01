@@ -1,0 +1,10 @@
+with c as 
+( SELECT [iot].IoTHub.ConnectionDeviceId , System.Timestamp() as WindowEnd, max([iot].Temperature) as maxt
+FROM [iot] TIMESTAMP BY [iot].IoTHub.EnqueuedTime
+GROUP BY [iot].IoTHub.ConnectionDeviceId , HoppingWindow(minute, 1, 1)
+HAVING max([iot].Temperature)>29 and ([iot].IoTHub.ConnectionDeviceId = 'm5go0001' or [iot].IoTHub.ConnectionDeviceId = 'f0001r0003s0001')
+)
+
+select c1.WindowEnd,c1.ConnectionDeviceId as dev1,c1.maxt as dev1maxt , c2.ConnectionDeviceId as dev2,c2.maxt as dev2maxt
+into blob
+from c c1 join c c2 on c1.WindowEnd = c2.WindowEnd AND c1.ConnectionDeviceId = 'm5go0001' AND c2.ConnectionDeviceId = 'f0001r0003s0001' AND DATEDIFF(minute,c1,c2) BETWEEN 0 AND 1

@@ -1,0 +1,2 @@
+Z:\AzFY21-PaaS03\16-IoT-Hub\2022IotPnP\TK_M5StackSimulator\bin\Release\net6.0\win-x64\publish\TK_M5StackSimulator.pdb
+Z:\AzFY21-PaaS03\16-IoT-Hub\2022IotPnP\TK_M5StackSimulator\bin\Release\net6.0\win-x64\publish\TK_M5StackSimulator.exe

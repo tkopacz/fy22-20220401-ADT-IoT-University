@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="resourceName" Label="resourceName" Group="Expanded" SubscriptionId="subscriptionId" TotalStreamingUnits="1" ActivityId="6d8f3c88-491f-4ed5-b83d-4603bc0fae32" EventsOutOfOrderPolicy="Adjust" EventsOutOfOrderMaxDelayInMS="2147483647" EventsLateArrivalMaxDelayInMS="-1" />
+    <Node Id="streamingNode0" Label="streamingNode0" Group="Expanded" MemorySizeInMB="1024" />
+    <Node Id="blob#0$0" Label="blob" ProcessorType="Trill" ProcessorId="blob#0$0" InputTimeShift="00:02:00" />
+    <Node Id="blob-blob#0$0" Label="blob" ProcessorType="Output" ProcessorId="blob-blob#0$0" AdapterType="LocalOutput" PartitionIds="0" SerializerType="Json" InputTimeShift="00:13:00" />
+    <Node Id="c#0$0" Label="c" ProcessorType="Trill" ProcessorId="c#0$0" InputTimeShift="00:01:00" />
+    <Node Id="c_7#0$0" Label="c" ProcessorType="Trill" ProcessorId="c_7#0$0" InputTimeShift="00:01:00" />
+    <Node Id="iot#0$1" Label="iot" ProcessorType="Input" ProcessorId="iot#0$1" AdapterType="InputFile" PartitionIds="0" SerializerType="Json" />
+    <Node Id="iot#0$0" Label="iot" ProcessorType="Input" ProcessorId="iot#0$0" AdapterType="InputFile" PartitionIds="0" SerializerType="Json" />
+  </Nodes>
+  <Links>
+    <Link Source="resourceName" Target="streamingNode0" Category="Contains" />
+    <Link Source="streamingNode0" Target="blob#0$0" Label="blob#0$0" Category="Contains" />
+    <Link Source="blob#0$0" Target="c#0$0" />
+    <Link Source="blob#0$0" Target="c_7#0$0" />
+    <Link Source="streamingNode0" Target="blob-blob#0$0" Label="blob-blob#0$0" Category="Contains" />
+    <Link Source="blob-blob#0$0" Target="blob#0$0" />
+    <Link Source="streamingNode0" Target="c#0$0" Label="c#0$0" Category="Contains" />
+    <Link Source="c#0$0" Target="iot#0$0" />
+    <Link Source="streamingNode0" Target="c_7#0$0" Label="c_7#0$0" Category="Contains" />
+    <Link Source="c_7#0$0" Target="iot#0$1" />
+    <Link Source="streamingNode0" Target="iot#0$1" Label="iot#0$1" Category="Contains" />
+    <Link Source="streamingNode0" Target="iot#0$0" Label="iot#0$0" Category="Contains" />
+  </Links>
+  <Properties />
+  <Categories />
+</DirectedGraph>

@@ -1,0 +1,35 @@
+{
+  "@id": "dtmi:example:Room;1",
+  "@type": "Interface",
+  "displayName": "Room",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "Temperature",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "Humidity",
+      "schema": "double"
+    },
+    {
+      "@type": "Relationship",
+      "name": "contains",
+      "displayName": "Room has sensors",
+      "target": "dtmi:example:M5Stack;1",
+      "minMultiplicity": 0,
+      "maxMultiplicity": 10,
+      "properties": [
+        {
+          "@type": "Property",
+          "schema": "double",
+          "description": "'weight' of sensors",
+          "name": "weight",
+        }
+      ]
+
+    }
+  ],
+  "@context": "dtmi:dtdl:context;2"
+}
